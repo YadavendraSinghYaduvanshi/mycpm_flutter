@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'screen./home.dart';
 import 'screen/Second.dart';
 import 'screen/Third.dart';
 import 'screen/login.dart';
@@ -12,6 +11,9 @@ import 'screen/human_resources.dart';
 import 'screen/hr_forms.dart';
 import 'screen/payslip_list.dart';
 import 'screen/payslip.dart';
+import 'screen/contact_us.dart';
+import 'screen/doc_view_pdf.dart';
+import 'utils/mywebview.dart';
 
 void main() => runApp(new MyCPMApp());
 
@@ -130,7 +132,6 @@ class MyCPMApp extends StatelessWidget{
       routes: <String, WidgetBuilder>{
         '/Second': (BuildContext context)=>new Second(),
         '/Third': (BuildContext context)=>new Third(),
-        '/login': (BuildContext context)=>new Home(),
         '/Profile': (BuildContext context)=>new Profile(),
         '/Groups': (BuildContext context)=>new Groups(),
         '/DataTest': (BuildContext context)=>new DataTest(),
@@ -140,6 +141,9 @@ class MyCPMApp extends StatelessWidget{
         '/Forms': (BuildContext context)=>new Forms(),
         '/PaySlipList': (BuildContext context)=>new PaySlipList(),
         '/PaySlip': (BuildContext context)=>new PaySlip(),
+        '/ContactUs': (BuildContext context)=>new ContactUs(),
+        '/DocsViewPDF': (BuildContext context)=>new DocsViewPDF(),
+        '/WebView': (BuildContext context)=>new MyWebView(),
       },
       home: new Login(),
     );

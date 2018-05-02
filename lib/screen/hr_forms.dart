@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mycpm_flutter/utils/form_card.dart';
+import 'package:mycpm_flutter/utils/mywebview.dart';
+
 
 class Forms extends StatefulWidget {
   @override
@@ -109,15 +111,23 @@ class _FormsState extends State<Forms> {
                   return new ListView(
                     children: snapshot.data.documents
                         .map((DocumentSnapshot document) {
-                      return new Form_Card(
-                        name: new Text(document['form_name']),
-                        time: new Text(document['update_time']),
-                        image: new CircleAvatar(
-                          backgroundImage:
+                      return
+                        new GestureDetector(
+                          onTap: (){Navigator.push(
+                            context,
+                            new MaterialPageRoute(
+                              builder: (context) => new MyWebView(url: document['url']),
+                            ));},
+                          child: new Form_Card(
+                            name: new Text(document['form_name']),
+                            time: new Text(document['update_time']),
+                            image: new CircleAvatar(
+                              backgroundImage:
                               new AssetImage('assets/forms_icon.png'),
-                          radius: 30.0,
-                        ),
-                      );
+                              radius: 30.0,
+                            ),
+                          ),
+                        );
                     }).toList(),
                   );
                 },
@@ -132,15 +142,23 @@ class _FormsState extends State<Forms> {
                   return new ListView(
                     children: snapshot.data.documents
                         .map((DocumentSnapshot document) {
-                      return new Form_Card(
-                        name: new Text(document['form_name']),
-                        time: new Text(document['update_time']),
-                        image: new CircleAvatar(
-                          backgroundImage:
+                      return
+                        new GestureDetector(
+                          onTap: (){Navigator.push(
+                              context,
+                              new MaterialPageRoute(
+                                builder: (context) => new MyWebView(url: document['url']),
+                              ));},
+                          child: new Form_Card(
+                            name: new Text(document['form_name']),
+                            time: new Text(document['update_time']),
+                            image: new CircleAvatar(
+                              backgroundImage:
                               new AssetImage('assets/reference_icon.png'),
-                          radius: 30.0,
-                        ),
-                      );
+                              radius: 30.0,
+                            ),
+                          ),
+                        );
                     }).toList(),
                   );
                 },

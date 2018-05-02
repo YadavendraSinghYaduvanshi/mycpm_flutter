@@ -83,7 +83,7 @@ class _MainPageState extends State<MainPage> {
   static final home_parent = new GestureDetector(
       onTap: () {
         print("Home clicked");
-        Navigator.of(context_global).pushNamed('/DataImage');
+        //Navigator.of(context_global).pushNamed('/DataImage');
       },
       child: new Container(
         child: new Row(children: <Widget>[
@@ -272,10 +272,13 @@ class _MainPageState extends State<MainPage> {
                       new Container(
                         margin: const EdgeInsets.only(
                             top: 4.0, bottom: 4.0, right: 10.0),
-                        child: new CircleAvatar(
-                          backgroundImage: new AssetImage('assets/news.png'),
-                          radius: 40.0,
-                        ),
+                        child: new GestureDetector(
+                          onTap: (){Navigator.of(context).pushNamed('/DataImage');},
+                          child: new CircleAvatar(
+                            backgroundImage: new AssetImage('assets/news.png'),
+                            radius: 40.0,
+                          ),
+                        )
                       ),
                       new Container(
                         margin: const EdgeInsets.only(
@@ -338,10 +341,16 @@ class _MainPageState extends State<MainPage> {
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: <Widget>[
-                                      new Icon(
-                                        Icons.favorite,
-                                        color: Colors.grey,
-                                      ),
+                                      new GestureDetector(
+                                        onTap:(){
+                                          var isfavourite = document['favourite']?false:true;
+                                          document.reference.setData({'file_name':document['file_name'],'path':document['path'],'favourite': isfavourite});
+                                        },
+                                        child: new Icon(
+                                          Icons.favorite,
+                                          color: document['favourite']?Colors.pink:Colors.grey,
+                                        ),
+                                      )
                                     ],
                                   )));
                         }).toList(),

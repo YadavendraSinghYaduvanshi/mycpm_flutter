@@ -6,6 +6,13 @@ class Login extends StatelessWidget {
   static final TextEditingController _uid = new TextEditingController();
   static final TextEditingController _psw = new TextEditingController();
 
+  final scaffoldKey = new GlobalKey<ScaffoldState>();
+  static final formKey = new GlobalKey<FormState>();
+
+  String _email;
+  String _password;
+
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -21,7 +28,7 @@ class Login extends StatelessWidget {
             margin: new EdgeInsets.symmetric(vertical: 20.0),
             child: new Center(
               child: new Image(
-                image: new AssetImage('assets/cpm_10th_year_celebration.png'),
+                image: new AssetImage('assets/cpm_10th_year_celebration.jpg'),
                 height: 150.0,
                 width: 150.0,
               ),
@@ -30,9 +37,9 @@ class Login extends StatelessWidget {
           new SizedBox(height: 24.0),
           new Container(
             margin: new EdgeInsets.symmetric(vertical: 10.0),
-            height: 200.0,
             child: new Center(
               child: new Form(
+                key: formKey,
                   child: new Card(
                 child: new Container(
                   padding: new EdgeInsets.all(15.0),
@@ -44,6 +51,7 @@ class Login extends StatelessWidget {
                             new InputDecoration(hintText: "Enter User Id"),
                         validator: (val) =>
                         val.length < 1 ? 'Please enter User Id.' : null,
+                        onSaved: (val) => _email = val,
                       ),
                       new TextFormField(
                         controller: _psw,
@@ -52,6 +60,7 @@ class Login extends StatelessWidget {
                         obscureText: true,
                         validator: (val) =>
                         val.length < 1 ? 'Please enter password.' : null,
+                        onSaved: (val) => _password = val,
                       ),
                       new Container(
                         margin: new EdgeInsets.symmetric(vertical: 10.0),
@@ -83,22 +92,32 @@ class Login extends StatelessWidget {
   }
 
   void _onLoading(BuildContext context) {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      child: new Dialog(
-        child: new Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            new CircularProgressIndicator(),
-            new Text("Loading"),
-          ],
+
+    final form = formKey.currentState;
+
+    if (form.validate()) {
+      form.save();
+
+      // Email & password matched our validation rules
+      // and are saved to _email and _password fields.
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        child: new Dialog(
+          child: new Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              new CircularProgressIndicator(),
+              new Text("Loading"),
+            ],
+          ),
         ),
-      ),
-    );
-    new Future.delayed(new Duration(seconds: 3), () {
-      Navigator.pop(context); //pop dialog
-      Navigator.of(context).pushNamed('/MainPage');
-    });
+      );
+      new Future.delayed(new Duration(seconds: 3), () {
+        Navigator.pop(context); //pop dialog
+        Navigator.of(context).pushNamed('/MainPage');
+      });
+    }
+
   }
 }

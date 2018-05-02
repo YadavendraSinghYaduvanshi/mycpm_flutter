@@ -6,11 +6,13 @@ dependencies:
     sdk: flutter
   cloud_firestore: " 0.6.3"
   firebase_storage: " 0.2.6"
-    progress_hud: "^0.2.2"
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.0
+
+  url_launcher: "^3.0.0"
+  flutter_webview_plugin: "^0.1.5"
 
 
 dev_dependencies:
@@ -36,6 +38,7 @@ flutter:
 
   assets:
       - assets/cpm_10th_year_celebration.png
+      - assets/cpm_10th_year_celebration.jpg
       - assets/images_pink.jpg
       - assets/image_fashion.jpg
       - assets/event1.jpg

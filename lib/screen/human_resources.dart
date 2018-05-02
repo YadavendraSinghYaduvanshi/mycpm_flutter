@@ -106,22 +106,25 @@ class _HumanResourcesState extends State<HumanResources> {
                   ),
                 ),
                 new Expanded(
-                  child: new Container(
-                      margin: const EdgeInsets.only(
-                          top: 2.0, bottom: 2.0, right: 5.0),
-                      child: new Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          new CircleAvatar(
-                            backgroundImage:
-                            new AssetImage('assets/forms.jpg'),
-                            radius: 60.0,
-                          ),
-                          new Text("Contact Us",
-                              style: new TextStyle(
-                                  color: Colors.blue, fontSize: 20.0, fontStyle: FontStyle.normal))
-                        ],
-                      )
+                  child:new GestureDetector(
+                    onTap: (){Navigator.of(context).pushNamed('/ContactUs');},
+                    child: new Container(
+                        margin: const EdgeInsets.only(
+                            top: 2.0, bottom: 2.0, right: 5.0),
+                        child: new Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            new CircleAvatar(
+                              backgroundImage:
+                              new AssetImage('assets/forms.jpg'),
+                              radius: 60.0,
+                            ),
+                            new Text("Contact Us",
+                                style: new TextStyle(
+                                    color: Colors.blue, fontSize: 20.0, fontStyle: FontStyle.normal))
+                          ],
+                        )
+                    ),
                   ),
                 ),
               ],

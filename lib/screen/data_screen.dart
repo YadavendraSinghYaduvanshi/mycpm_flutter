@@ -33,14 +33,14 @@ class DataState extends State<DataTest> {
             }).toList(),
           ),
           floatingActionButton: new FloatingActionButton(onPressed: (){
-            Firestore.instance
+            /*Firestore.instance
                 .collection('payslip')
                 .document()
-                .setData({'row_name': 'Take Home', 'row_value': '23576.00'});
-            /*Firestore.instance
-                .collection('images')
+                .setData({'row_name': 'Take Home', 'row_value': '23576.00'});*/
+            Firestore.instance
+                .collection('news')
                 .document()
-                .setData({'file_name': 'image_fashion.jpg', 'path': 'https://firebasestorage.googleapis.com/v0/b/silicon-airlock-129611.appspot.com/o/image_fashion.jpg?alt=media&token=00da5a0d-55e8-4e54-9040-6ee0d0f51f49'});*/
+                .setData({'file_name': 'Auto Expo is going to start at Expo Mart from 21 may to 26 May.', 'path': 'https://firebasestorage.googleapis.com/v0/b/silicon-airlock-129611.appspot.com/o/nexpo02.jpg?alt=media&token=063a4b75-b016-450d-b469-1267bb14356a'});
           },child: new Icon(Icons.add),),
         );
       },
