@@ -14,8 +14,8 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="mycpm_flutter"
-        android:icon="@mipmap/ic_launcher">
+        android:label="MYCPM"
+        android:icon="@drawable/cpm_10th_year_celebration">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

@@ -38,34 +38,94 @@ class ImagePageState extends State<ImagePage> {
 
   }
 
+  var color_fav = Colors.pink;
+  var color_default = Colors.grey;
+
+
   @override
   Widget build(BuildContext context) {
     return new StreamBuilder<QuerySnapshot>(
-      stream: Firestore.instance.collection('images').snapshots,
+      stream: Firestore.instance.collection('news').snapshots,
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if (!snapshot.hasData) return new Text('Loading...');
+        if (!snapshot.hasData) return new Text('');
         return new Scaffold(
           appBar: AppBar(
-            title: new Text("Image"),
+            title: new Text("News"),
           ),
-          body: new ListView(
-            children: snapshot.data.documents.map((DocumentSnapshot document) {
-              return new MyCard(
-                title:  new Text(document['file_name'],style: new TextStyle(
-                    color: Colors.blue,
-                    fontSize: 20.0,
-                    fontStyle: FontStyle.italic)),
-                image: new Image.network(document['path'],
-                    height: 200.0),
-                favourite: new Icon(Icons.favorite, color: Colors.grey,),
-              );
-            }).toList(),
-          ),
-          floatingActionButton:new FloatingActionButton(
+          body: new Container(
+            child: new Column(
+              children: <Widget>[
+                new Container(
+                    height: 10.0,
+                    child: new Row(
+                      children: <Widget>[
+                        new Expanded(
+                          child: new Container(
+                            decoration: new BoxDecoration(color: Colors.blue),
+                          ),
+                        ),
+                        new Expanded(
+                          child: new Container(
+                            decoration: new BoxDecoration(color: Colors.green),
+                          ),
+                        ),
+                        new Expanded(
+                          child: new Container(
+                            decoration: new BoxDecoration(color: Colors.red),
+                          ),
+                        ),
+                      ],
+                    )),
+                new Expanded(
+                  child: new StreamBuilder<QuerySnapshot>(
+                    stream: Firestore.instance.collection('news').snapshots,
+                    builder: (BuildContext context,
+                        AsyncSnapshot<QuerySnapshot> snapshot) {
+                      if (!snapshot.hasData) return new Text('Loading...');
+                      return new ListView(
+                        shrinkWrap: true,
+                        children: snapshot.data.documents
+                            .map((DocumentSnapshot document) {
+                          return new MyCard(
+                              title: new Text(document['file_name'],
+                                  style: new TextStyle(
+                                      color: Colors.blue,
+                                      fontSize: 16.0,
+                                      fontStyle: FontStyle.normal)),
+                              image: new Image.network(document['path'],
+                                  height: 200.0),
+                              favourite: new Container(
+                                  margin: new EdgeInsets.symmetric(
+                                      vertical: 2.0, horizontal: 10.0),
+                                  child: new Row(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: <Widget>[
+                                      new GestureDetector(
+                                        onTap:(){
+                                          var isfavourite = document['favourite']?false:true;
+                                          document.reference.setData({'file_name':document['file_name'],'path':document['path'],'favourite': isfavourite});
+                                        },
+                                        child: new Icon(
+                                          Icons.favorite,
+                                          color: document['favourite']?Colors.pink:Colors.grey,
+                                        ),
+                                      )
+                                    ],
+                                  )));
+                        }).toList(),
+                      );
+                    },
+                  ),
+                )
+              ],
+            ),
+          )
+          /*floatingActionButton:new FloatingActionButton(
             onPressed: _uploadFile,
             tooltip: 'Upload',
             child: const Icon(Icons.file_upload),
-          ),
+          ),*/
         );
       },
     );
